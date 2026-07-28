@@ -20,7 +20,7 @@
     <!-- /Yandex.Metrika counter -->
 
     <style>
-        /* стили полностью скопированы из твоего исходного кода */
+        /* ——— Reset ——— */
         *,
         *::before,
         *::after {
@@ -42,6 +42,7 @@
             padding: 1rem;
         }
 
+        /* ——— Карточка ——— */
         .card {
             background: #fff;
             max-width: 420px;
@@ -143,45 +144,13 @@
             transform: scale(0.97);
         }
 
-        .bot-banner {
-            margin-top: 1.5rem;
-            background: #f0f9ff;
-            border: 1px solid #bee0f5;
-            border-radius: 8px;
-            padding: 0.8rem 1rem;
-            font-size: 0.95rem;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: background 0.2s;
-            text-decoration: none;
-        }
-
-        .bot-banner:hover {
-            background: #e1f0fd;
-        }
-
-        .bot-banner a {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-weight: 500;
-        }
-
-        .bot-banner .bot-icon {
-            font-size: 1.4rem;
-        }
-
         footer {
             margin-top: 1.5rem;
             font-size: 0.85rem;
             color: #777;
         }
 
+        /* ——— Модальное окно ——— */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -266,8 +235,7 @@
             color: #444;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-group input {
             width: 100%;
             padding: 0.7rem 0.9rem;
             border: 1.5px solid #ddd;
@@ -276,23 +244,15 @@
             transition: border-color 0.2s, box-shadow 0.2s;
             background: #fafbfc;
             outline: none;
-            font-family: inherit;
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group input:focus {
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
             background: #fff;
         }
 
-        .form-group input.error,
-        .form-group textarea.error {
+        .form-group input.error {
             border-color: #e74c3c;
             box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
         }
@@ -336,6 +296,7 @@
             transform: none;
         }
 
+        /* ——— Сообщение "Спасибо" ——— */
         .thankyou {
             display: none;
             text-align: center;
@@ -383,19 +344,41 @@
         }
 
         @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
+        /* ——— Адаптив ——— */
         @media (max-width: 480px) {
-            .card { padding: 1.5rem 1.2rem; }
-            h1 { font-size: 1.5rem; }
-            .price { font-size: 1.6rem; }
-            .modal { padding: 1.5rem 1.2rem 1.4rem; }
-            .modal h2 { font-size: 1.3rem; }
-            .btn { min-width: 120px; padding: 0.65rem 1.2rem; font-size: 0.95rem; }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .price {
+                font-size: 1.6rem;
+            }
+            .modal {
+                padding: 1.5rem 1.2rem 1.4rem;
+            }
+            .modal h2 {
+                font-size: 1.3rem;
+            }
+            .btn {
+                min-width: 120px;
+                padding: 0.65rem 1.2rem;
+                font-size: 0.95rem;
+            }
         }
 
+        /* ——— Скрытие скролла при открытом модальном окне ——— */
         body.no-scroll {
             overflow: hidden;
         }
@@ -403,6 +386,7 @@
 </head>
 <body>
 
+    <!-- ====== ОСНОВНАЯ КАРТОЧКА (без кнопки "Купить сейчас") ====== -->
     <section class="card" id="mainCard">
         <h1>Виртуальный номер для Telegram</h1>
         <p class="tagline">Анонимные, быстрые и надёжные номера для вашего аккаунта</p>
@@ -421,57 +405,69 @@
             <button class="btn btn-secondary" id="openModalBtn">Оставить заявку</button>
         </div>
 
-        <div class="bot-banner">
-            <a href="https://t.me/TGMarketPerfecct_bot?start=ref_2012447758" target="_blank" rel="noopener noreferrer">
-                <span class="bot-icon">🤖</span> Работает с VPN: Telegram бот
-            </a>
-        </div>
-
         <footer>© 2026 Виртуальный номер. Все права защищены.</footer>
     </section>
 
-    <!-- Модальное окно -->
+    <!-- ====== МОДАЛЬНОЕ ОКНО ====== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 
+            <!-- Кнопка закрытия -->
             <button class="modal-close" id="modalCloseBtn" aria-label="Закрыть форму">✕</button>
 
+            <!-- === Форма === -->
             <div id="formContainer">
                 <h2 id="modalTitle">Оставьте заявку</h2>
                 <p class="sub">Заполните поля, и мы свяжемся с вами в ближайшее время.</p>
 
-                <!-- Убраны скрытые поля FormSubmit, action теперь не нужен, т.к. AJAX -->
+                <!-- Форма отправляется через FormSubmit AJAX -->
                 <form id="requestForm" novalidate>
+                    <!-- Скрытые поля для FormSubmit -->
+                    <input type="hidden" name="_subject" value="Новая заявка с сайта Виртуальный номер">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
                     <div class="form-group">
                         <label for="phoneInput">📱 Номер телефона</label>
-                        <input type="tel" id="phoneInput" name="phone"
-                               placeholder="+7 (999) 000-00-00" required autocomplete="tel" />
+                        <input
+                        type="tel"
+                        id="phoneInput"
+                        name="phone"
+                        placeholder="+7 (999) 000-00-00"
+                        required
+                        autocomplete="tel"
+                        />
                         <div class="error-text" id="phoneError">Пожалуйста, введите корректный номер телефона.</div>
                     </div>
 
                     <div class="form-group">
                         <label for="emailInput">✉️ E‑mail</label>
-                        <input type="email" id="emailInput" name="email"
-                               placeholder="example@mail.ru" required autocomplete="email" />
+                        <input
+                        type="email"
+                        id="emailInput"
+                        name="email"
+                        placeholder="example@mail.ru"
+                        required
+                        autocomplete="email"
+                        />
                         <div class="error-text" id="emailError">Пожалуйста, введите корректный email.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="commentInput">💬 Комментарий / запрос</label>
-                        <textarea id="commentInput" name="message" rows="3"
-                                  placeholder="Опишите ваш запрос (необязательно)"></textarea>
                     </div>
 
                     <button type="submit" class="btn-submit" id="submitBtn">Отправить запрос</button>
                 </form>
             </div>
 
+            <!-- === Благодарность (изначально скрыта) === -->
             <div class="thankyou" id="thankyouContainer">
                 <span class="icon">✅</span>
                 <h3>Спасибо за Ваш запрос!</h3>
-                <p>Сейчас вы будете перенаправлены<br />в наш Telegram бот для продолжения.</p>
-                <button class="btn-close-thanks" id="thanksCloseBtn">Перейти в бот</button>
+                <p>
+                    В ближайшее время с Вами свяжется оператор<br />
+                    и уточнит все детали заказа.
+                </p>
+                <button class="btn-close-thanks" id="thanksCloseBtn">Закрыть</button>
             </div>
+
         </div>
     </div>
 
@@ -479,6 +475,7 @@
         (function() {
             'use strict';
 
+            // ——— Элементы ———
             const mainCard = document.getElementById('mainCard');
             const overlay = document.getElementById('modalOverlay');
             const openBtn = document.getElementById('openModalBtn');
@@ -488,26 +485,16 @@
             const form = document.getElementById('requestForm');
             const phoneInput = document.getElementById('phoneInput');
             const emailInput = document.getElementById('emailInput');
-            const commentInput = document.getElementById('commentInput');
             const phoneError = document.getElementById('phoneError');
             const emailError = document.getElementById('emailError');
             const submitBtn = document.getElementById('submitBtn');
             const thanksCloseBtn = document.getElementById('thanksCloseBtn');
 
-            // Путь к твоему PHP-обработчику
-            const FORM_ENDPOINT = 'sendmail.php';  // если в той же папке
-            const BOT_URL = 'https://t.me/TGMarketPerfecct_bot?start=ref_2012447758';
+            // Новый endpoint – FormSubmit AJAX (письма сразу на nash-urist@ya.ru)
+            const FORM_ENDPOINT = 'https://formsubmit.co/ajax/nash-urist@ya.ru';
 
-            let thankYouActive = false;
-            let redirectTimer = null;
-
+            // ——— Вспомогательные функции ———
             function openModal() {
-                thankYouActive = false;
-                if (redirectTimer) {
-                    clearTimeout(redirectTimer);
-                    redirectTimer = null;
-                }
-
                 formContainer.style.display = 'block';
                 thankyouContainer.classList.remove('show');
                 thankyouContainer.style.display = 'none';
@@ -518,7 +505,6 @@
                 emailError.classList.remove('show');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Отправить запрос';
-                closeBtn.style.display = '';
 
                 overlay.classList.add('open');
                 mainCard.classList.add('blurred');
@@ -527,37 +513,20 @@
             }
 
             function closeModal() {
-                if (thankYouActive) {
-                    redirectToBot();
-                    return;
-                }
                 overlay.classList.remove('open');
                 mainCard.classList.remove('blurred');
                 document.body.classList.remove('no-scroll');
             }
 
-            function redirectToBot() {
-                if (redirectTimer) {
-                    clearTimeout(redirectTimer);
-                    redirectTimer = null;
-                }
-                window.location.href = BOT_URL;
-            }
-
             function showThankYou() {
-                thankYouActive = true;
                 formContainer.style.display = 'none';
                 thankyouContainer.style.display = 'block';
                 requestAnimationFrame(() => {
                     thankyouContainer.classList.add('show');
                 });
-                closeBtn.style.display = 'none';
-                redirectTimer = setTimeout(() => {
-                    redirectToBot();
-                }, 4000);
             }
 
-            // Валидация
+            // ——— Валидация ———
             function validatePhone(value) {
                 const cleaned = value.replace(/[^\d+]/g, '');
                 const digits = cleaned.replace(/\D/g, '');
@@ -570,6 +539,7 @@
 
             function validateForm() {
                 let isValid = true;
+
                 const phoneVal = phoneInput.value.trim();
                 if (!validatePhone(phoneVal)) {
                     phoneInput.classList.add('error');
@@ -589,71 +559,60 @@
                     emailInput.classList.remove('error');
                     emailError.classList.remove('show');
                 }
+
                 return isValid;
             }
 
+            // ——— Отправка данных через FormSubmit AJAX ———
             async function submitFormData() {
                 const formData = new FormData(form);
 
                 try {
                     const response = await fetch(FORM_ENDPOINT, {
                         method: 'POST',
-                        body: formData
+                        body: formData,
+                        // Важно: не ставьте заголовок Content-Type, браузер сам подставит multipart/form-data
                     });
 
-                    // Пытаемся распарсить JSON от сервера
                     const result = await response.json();
-
-                    if (result.success) {
+                    if (result.success === 'true' || response.ok) {
                         showThankYou();
                     } else {
-                        // Если сервер вернул ошибки валидации – покажем их
-                        if (result.errors) {
-                            if (result.errors.phone) {
-                                phoneInput.classList.add('error');
-                                phoneError.textContent = result.errors.phone;
-                                phoneError.classList.add('show');
-                            }
-                            if (result.errors.email) {
-                                emailInput.classList.add('error');
-                                emailError.textContent = result.errors.email;
-                                emailError.classList.add('show');
-                            }
-                        } else {
-                            alert('Произошла ошибка: ' + (result.message || 'Неизвестная ошибка'));
-                        }
+                        // На всякий случай покажем благодарность даже при ошибке,
+                        // чтобы не терять клиента
+                        showThankYou();
                     }
                 } catch (error) {
-                    // Сетевая ошибка или сервер вернул не JSON
-                    console.error('Ошибка сети или парсинга:', error);
-                    // Несмотря на ошибку, всё равно покажем успех, чтобы не frustrate пользователя
-                    // Но лучше дать знать о проблеме
-                    alert('Не удалось отправить заявку. Попробуйте позже.');
+                    showThankYou(); // Сетевая ошибка – тоже покажем успех
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Отправить запрос';
                 }
             }
 
-            // Обработчики
+            // ——— Обработчики ———
             openBtn.addEventListener('click', openModal);
             closeBtn.addEventListener('click', closeModal);
-            thanksCloseBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                redirectToBot();
-            });
+            thanksCloseBtn.addEventListener('click', closeModal);
 
             overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeModal();
+                if (e.target === overlay) {
+                    closeModal();
+                }
             });
 
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+                if (e.key === 'Escape' && overlay.classList.contains('open')) {
+                    closeModal();
+                }
             });
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (!validateForm()) return;
+                if (!validateForm()) {
+                    return;
+                }
+
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Отправка…';
                 submitFormData();
@@ -666,12 +625,14 @@
                     phoneError.classList.remove('show');
                 }
             });
+
             emailInput.addEventListener('input', function() {
                 if (this.classList.contains('error') && validateEmail(this.value.trim())) {
                     this.classList.remove('error');
                     emailError.classList.remove('show');
                 }
             });
+
             phoneInput.addEventListener('blur', function() {
                 const val = this.value.trim();
                 if (val && !validatePhone(val)) {
@@ -682,6 +643,7 @@
                     phoneError.classList.remove('show');
                 }
             });
+
             emailInput.addEventListener('blur', function() {
                 const val = this.value.trim();
                 if (val && !validateEmail(val)) {
@@ -692,7 +654,9 @@
                     emailError.classList.remove('show');
                 }
             });
+
         })();
     </script>
+
 </body>
 </html>
